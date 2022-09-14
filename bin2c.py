@@ -64,6 +64,10 @@ if __name__ == "__main__":
     # if len(args) != 2:
     #     raise ValueError("usage: python %s input_img_dir output_c_dir" % sys.argv[0])
     # img_dir, c_dir= args
+    # if(not os.path.isdir(img_dir)):
+    #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
+    # if(not os.path.isdir(c_dir)):
+    #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
     img_dir = input("请输入图片所在文件夹: ")
     while(not os.path.isdir(img_dir)):
         img_dir = input("文件夹不存在,请重新输入图片所在文件夹: ")
