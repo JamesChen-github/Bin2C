@@ -13,7 +13,7 @@ const SDRV_RES_ATTRIBUTE_MEM_ALIGN uint8_t sdrv_res_{NAME_LOWER}_map[] = {
 #if SDRV_RES_{NAME_UPPER}_RF == SDRV_RES_FORMAT_DATA_RAW
 {DATA_RAW}
 #endif
-} __SECTION(".sdrvresdata");
+};
 
 const sdrv_res_dsc_t sdrv_res_{NAME_LOWER} = {
   .header.always_zero = SDRV_RES_{NAME_UPPER}_RF,

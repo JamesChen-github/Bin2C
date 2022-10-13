@@ -12,7 +12,6 @@ PY3 = sys.version_info[0] == 3
 def _read_bin(filename):
     """ Read binary data from file and return as a C array
     :param filename: a filename of a file to read.
-    :param varname: a C array variable name.
     """
     if not os.path.isfile(filename):
         print('File "%s" is not found!' % filename)
@@ -72,22 +71,22 @@ def _bin2c():
 
 
 if __name__ == "__main__":
-    # preprocess预处理
-    # args = sys.argv[1:]
-    # if len(args) != 2:
-    #     raise ValueError("usage: python %s input_img_dir output_c_dir" % sys.argv[0])
-    # img_dir, c_dir= args
-    # if(not os.path.isdir(img_dir)):
-    #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
-    # if(not os.path.isdir(c_dir)):
-    #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
     print("version: 20221013")
-    img_dir = input("请输入图片所在文件夹: ")
-    while(not os.path.isdir(img_dir)):
-        img_dir = input("文件夹不存在,请重新输入图片所在文件夹: ")
-    c_dir = input("请输入目标c文件存放的文件夹: ")
-    while(not os.path.isdir(c_dir)):
-        c_dir = input("文件夹不存在,请重新输入目标c文件存放的文件夹: ")
+    # preprocess预处理
+    args = sys.argv[1:]
+    if len(args) != 2:
+        raise ValueError("usage: %s input_img_dir output_c_dir" % sys.argv[0])
+    img_dir, c_dir= args
+    if(not os.path.isdir(img_dir)):
+        raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
+    if(not os.path.isdir(c_dir)):
+        raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
+    # img_dir = input("请输入图片所在文件夹: ")
+    # while(not os.path.isdir(img_dir)):
+    #     img_dir = input("文件夹不存在,请重新输入图片所在文件夹: ")
+    # c_dir = input("请输入目标c文件存放的文件夹: ")
+    # while(not os.path.isdir(c_dir)):
+    #     c_dir = input("文件夹不存在,请重新输入目标c文件存放的文件夹: ")
     img_paths = os.listdir(img_dir)
     for img_path in img_paths:
         if '.c' in img_path or os.path.isdir(img_path):
