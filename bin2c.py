@@ -4,6 +4,7 @@
 import re
 import sys
 import os
+import platform
 
 PY3 = sys.version_info[0] == 3
 
@@ -42,7 +43,19 @@ def _bin2c():
     print("read from %s" % img_path)
     # print(binRaw)
     
-    with open("sd_res_template.c", "r") as template_file:
+    if platform.system()=="Windows":
+        bin2c_path = os.popen("where bin2c.exe").read().strip()
+    elif platform.system()=="Linux":
+        bin2c_path = os.popen("which bin2c.exe").read().strip()
+    else:
+        bin2c_path = sys.argv[0]
+    if not os.path.isfile(bin2c_path):
+        bin2c_path = sys.argv[0]
+    print(bin2c_path)
+    # print(sys.argv[0]) bin2c
+    # print(__file__) C:\Users\new\AppData\Local\Temp\_MEI181202\bin2c.py
+    template_path = os.path.join(os.path.dirname(bin2c_path), "sd_res_template.c")
+    with open(template_path, "r") as template_file:
         output_lines = []
         lines = template_file.readlines()
         for line in lines:
@@ -68,6 +81,7 @@ if __name__ == "__main__":
     #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
     # if(not os.path.isdir(c_dir)):
     #     raise IOError("文件夹不存在,请重新输入图片所在文件夹: ")
+    print("version: 20221013")
     img_dir = input("请输入图片所在文件夹: ")
     while(not os.path.isdir(img_dir)):
         img_dir = input("文件夹不存在,请重新输入图片所在文件夹: ")
