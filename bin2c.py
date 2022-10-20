@@ -41,18 +41,7 @@ def _bin2c():
     (dataRaw, data11_size) = _read_bin(img_path)
     print("read from %s" % img_path)
     # print(binRaw)
-    
-    if platform.system()=="Windows":
-        bin2c_path = os.popen("where bin2c.exe").read().strip()
-    elif platform.system()=="Linux":
-        bin2c_path = os.popen("which bin2c.exe").read().strip()
-    else:
-        bin2c_path = sys.argv[0]
-    if not os.path.isfile(bin2c_path):
-        bin2c_path = sys.argv[0]
-    print(bin2c_path)
-    # print(sys.argv[0]) bin2c
-    # print(__file__) C:\Users\new\AppData\Local\Temp\_MEI181202\bin2c.py
+
     template_path = os.path.join(os.path.dirname(bin2c_path), "sd_res_template.c")
     with open(template_path, "r") as template_file:
         output_lines = []
@@ -72,6 +61,19 @@ def _bin2c():
 
 if __name__ == "__main__":
     print("version: 20221013")
+    # if platform.system()=="Windows":
+    #     bin2c_path = os.popen("where bin2c.exe").read().strip()
+    # elif platform.system()=="Linux":
+    #     bin2c_path = os.popen("which bin2c.exe").read().strip()
+    # else:
+    #     bin2c_path = sys.argv[0]
+    # if not os.path.isfile(bin2c_path):
+    #     bin2c_path = sys.argv[0]
+    bin2c_path = sys.executable
+    # print(os.path.abspath(sys.argv[0]))
+    print(bin2c_path)
+    # print(sys.argv[0]) bin2c
+    # print(__file__) C:\Users\new\AppData\Local\Temp\_MEI181202\bin2c.py
     # preprocess预处理
     args = sys.argv[1:]
     if len(args) != 2:
@@ -111,9 +113,9 @@ if __name__ == "__main__":
                 print("%s 存在中文，程序中断" % img_path)
                 os.system("pause")
                 sys.exit(1)
-        
+
         _bin2c()
-    
+
     print("Finished!")
-    os.system("pause")
+    # os.system("pause")
 
